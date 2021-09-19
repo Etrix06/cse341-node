@@ -26,4 +26,5 @@ const server = http.createServer((req, res) => {
   res.end();
 });
 
+console.log('Listening on 3000');
 server.listen(3000);
