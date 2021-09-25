@@ -1,4 +1,5 @@
 const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');  //called on terminal using npm install --save body-parser
 
@@ -9,6 +10,8 @@ const shopRoutes = require('./routes/shop');
 
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public')));//added last
+
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
