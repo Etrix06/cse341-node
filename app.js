@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');  //called on terminal using npm insta
 
 const app = express();  //initializes a new object in the constant app
 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminData = require('./routes/admin');
@@ -20,7 +20,7 @@ app.use('/admin', adminData.routes); //this imports the routes export in admin.j
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).render('404', {pageTitle: 'Page Not Found'});
+  res.status(404).render('404', {pageTitle: 'Page Not Found', path: ''});
 });
 
 app.listen(3000);
