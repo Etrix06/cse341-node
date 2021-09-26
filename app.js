@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');  //called on terminal using npm insta
 
 const app = express();  //initializes a new object in the constant app
 
-const adminRoutes = require('./routes/admin');
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 
@@ -13,11 +16,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));//added last
 
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes); //this imports the routes export in admin.js
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  res.status(404).render('404', {pageTitle: 'Page Not Found'});
 });
 
 app.listen(3000);
